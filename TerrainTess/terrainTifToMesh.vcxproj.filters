@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\Camera.cpp">
+      <Filter>utils</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GLSLProgram.cpp">
+      <Filter>utils</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GLUtils.cpp">
+      <Filter>utils</Filter>
+    </ClCompile>
+    <ClCompile Include="src\RegularGrid.cpp">
+      <Filter>utils</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Sphere.cpp">
+      <Filter>utils</Filter>
+    </ClCompile>
+    <ClCompile Include="src\TextureManager.cpp">
+      <Filter>utils</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\Camera.h">
+      <Filter>utils</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GLSLProgram.h">
+      <Filter>utils</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GLUtils.h">
+      <Filter>utils</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Mesh.h">
+      <Filter>utils</Filter>
+    </ClInclude>
+    <ClInclude Include="src\RegularGrid.h">
+      <Filter>utils</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Sphere.h">
+      <Filter>utils</Filter>
+    </ClInclude>
+    <ClInclude Include="src\TextureManager.h">
+      <Filter>utils</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="shader\vtfDisplacement.frag">
+      <Filter>shaders</Filter>
+    </None>
+    <None Include="shader\vtfDisplacement.geom">
+      <Filter>shaders</Filter>
+    </None>
+    <None Include="shader\vtfDisplacement.vert">
+      <Filter>shaders</Filter>
+    </None>
+    <None Include="shader\quadtess.tcs">
+      <Filter>shaders</Filter>
+    </None>
+    <None Include="shader\quadtess.tes">
+      <Filter>shaders</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="shaders">
+      <UniqueIdentifier>{0b6f3105-1a6c-477f-b20d-85ad1d4d190d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="utils">
+      <UniqueIdentifier>{04dcb7de-44e5-43aa-8d98-34e810093a93}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
