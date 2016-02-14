@@ -1,66 +1,25 @@
-#include "RegularGrid.h"
+#include "Terrain.h"
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtx/transform.hpp>
 #include <iostream>
+#include "TextureManager.h"
 
 using namespace std;
 
-RegularGrid::RegularGrid(GLFWwindow* window, uint32_t size)
-	: window(window), size(size/2)
+Terrain::Terrain(GLFWwindow* window)
 {
+	glActiveTexture(GL_TEXTURE0);
+	if (!TextureManager::Inst()->LoadTexture("resources/sm3.tif", 10))
+		std::cout << "Failed to load texture." << std::endl;
+	size = TextureManager::m_TexMap.at(10).size.x / 2.0f;
+
 	camera = new Camera(window);
-	lightPos = vec3((float)size / 2.0f, 100.0f, (float)size / 2.0f);
-	spherePos = vec3(0.0f, 0.0f, 0.0f);
+	lightPos = vec3((float)size, 300.0f, (float)size);
 }
 
-void RegularGrid::genRegularGrid()
+void Terrain::genRegularGrid()
 {
-	//// Vertices
-	//for (uint32_t i = 0; i < size; i++)
-	//{
-	//	for (uint32_t j = 0; j < size; j++)
-	//	{
-	//		vertices.emplace_back(i, 0, j);
-	//	}
-	//}
-
-	//// Indices
-	//for (uint32_t i = 0; i < size - 1; i++)
-	//{
-	//	for (uint32_t j = 0; j < size - 1; j++)
-	//	{
-	//		indices.emplace_back(size * i + j);
-	//		indices.emplace_back(size * (i + 1) + j);
-	//		indices.emplace_back(size * (i + 1) + j + 1);
-	//		indices.emplace_back(size * i + j + 1);
-	//	}
-	//}
-
-	//vector<vec3> aux;
-	//for (int i = 0; i < indices.size(); i++) {
-	//	aux.emplace_back(vertices[indices[i]]);
-	//}
-	//vertices.clear();
-	//vertices = aux;
-
-
-	//GLuint vboHandle;
-	//glGenBuffers(1, &vboHandle);
-	//glBindBuffer(GL_ARRAY_BUFFER, vboHandle);
-	//glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(vec3), (GLvoid*)&vertices[0], GL_STATIC_DRAW);
-
-	//glGenVertexArrays(1, &vaoID);
-	//glBindVertexArray(vaoID);
-
-	//glBindBuffer(GL_ARRAY_BUFFER, vboHandle);
-	//glVertexAttribPointer((GLuint)0, 3, GL_FLOAT, GL_FALSE, 0, (GLubyte *)NULL);
-	//glEnableVertexAttribArray(0);
-	//
-	//glBindVertexArray(0);
-	//glPatchParameteri(GL_PATCH_VERTICES, 4);
-
 	std::vector<vec3> vertices;
-	std::vector<vec2> tex;
 	//// Vertices
 	for (uint32_t i = 0; i < size; i++)
 	{
@@ -101,7 +60,7 @@ void RegularGrid::genRegularGrid()
 	glPatchParameteri(GL_PATCH_VERTICES, 3);
 }
 
-void RegularGrid::initMesh()
+void Terrain::initMesh()
 {
 	genRegularGrid();
 
@@ -134,14 +93,14 @@ void RegularGrid::initMesh()
 	glEnable(GL_DEPTH_TEST);
 }
 
-void RegularGrid::update(double deltaTime)
+void Terrain::update(double deltaTime)
 {
 	// update the camera
 	camera->Update(deltaTime);
 
 	//// matrices setup
 	viewMatrix = camera->Look();
-	modelMatrix = glm::translate(spherePos);
+	modelMatrix = glm::translate(vec3());
 	modelViewMatrix = viewMatrix * modelMatrix;
 	modelViewProjectionMatrix = projectionMatrix * modelViewMatrix;
 
@@ -165,7 +124,7 @@ void RegularGrid::update(double deltaTime)
 										   
 	// light info
 	shader.setUniform("Light.Position", viewMatrix * vec4(lightPos, 1.0f)); // Light position in eye coords.
-	shader.setUniform("Light.Intensity", 1.5f, 1.5f, 1.5f);
+	shader.setUniform("Light.Intensity", 1.0f, 1.0f, 1.0f);
 
 	// material info
 	shader.setUniform("Material.Ka", 0.3f, 0.5f, 0.3f); // Ambient reflectivity
@@ -179,17 +138,16 @@ void RegularGrid::update(double deltaTime)
 	shader.setUniform("camPos", camera->vEye);
 }
 
-void RegularGrid::render()
+void Terrain::render()
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	glBindVertexArray(vaoID);
 	glPatchParameteri(GL_PATCH_VERTICES, 4);
-	//glDrawArrays(GL_PATCHES, 0 , vertices.size());
 	glDrawElements(GL_PATCHES, indices.size(), GL_UNSIGNED_INT, (GLubyte *)NULL);
 	glFinish();
 }
 
-void RegularGrid::resize(int, int)
+void Terrain::resize(int, int)
 {
 }

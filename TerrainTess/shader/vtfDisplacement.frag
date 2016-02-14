@@ -16,7 +16,6 @@ struct MaterialInfo
 };
 uniform MaterialInfo Material;
 
-//in vec3 GPosition;
 in vec3 VPosition;
 in vec3 VNormal;
 in vec3 VColor;
@@ -29,7 +28,7 @@ vec3 phongModel( vec3 pos, vec3 norm )
     vec3 s = normalize(vec3(Light.Position) - pos);
     vec3 v = normalize(-pos.xyz);
     vec3 r = reflect( -s, norm );
-    vec3 ambient = Light.Intensity * VColor;
+    vec3 ambient = Light.Intensity * Material.Ka;
     float sDotN = max( dot(s,norm), 0.0 );
     vec3 diffuse = Light.Intensity * Material.Kd * sDotN;
     vec3 spec = vec3(0.0);
@@ -42,7 +41,5 @@ vec3 phongModel( vec3 pos, vec3 norm )
 
 void main() 
 {
-	//FragColor = vec4(phongModel(GPosition, VNormal), 1.0);
 	FragColor = vec4(phongModel(VPosition, VNormal), 1.0);
-	//FragColor = vec4(VColor, 1.0f);
 }

@@ -11,13 +11,10 @@
     <ClCompile Include="src\GLUtils.cpp">
       <Filter>utils</Filter>
     </ClCompile>
-    <ClCompile Include="src\RegularGrid.cpp">
-      <Filter>utils</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Sphere.cpp">
-      <Filter>utils</Filter>
-    </ClCompile>
     <ClCompile Include="src\TextureManager.cpp">
+      <Filter>utils</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Terrain.cpp">
       <Filter>utils</Filter>
     </ClCompile>
   </ItemGroup>
@@ -34,13 +31,10 @@
     <ClInclude Include="src\Mesh.h">
       <Filter>utils</Filter>
     </ClInclude>
-    <ClInclude Include="src\RegularGrid.h">
-      <Filter>utils</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Sphere.h">
-      <Filter>utils</Filter>
-    </ClInclude>
     <ClInclude Include="src\TextureManager.h">
+      <Filter>utils</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Terrain.h">
       <Filter>utils</Filter>
     </ClInclude>
   </ItemGroup>

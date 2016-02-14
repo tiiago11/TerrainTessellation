@@ -1,5 +1,6 @@
 //**********************************************
 //Singleton Texture Manager class
+// based on:
 //Written by Ben English
 //benjamin.english@oit.edu
 //

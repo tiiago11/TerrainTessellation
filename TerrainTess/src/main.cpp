@@ -1,15 +1,14 @@
 /*
 	GLSL 4.x demo
-	Mostra o uso de:
+	Use of:
 	-GLM - Math library
 	-Phong shading
-	-Procedural sphere generation using spheric coordinates
 	-VBO & VAO
 	-GL error detection
 	-glfwGetKeyOnce
+	-tessellation shaders
 
-
-	August 2015 - Tiago Augusto Engel - tengel@inf.ufsm.br
+	Tiago Augusto Engel - tengel@inf.ufsm.br
 */
 
 
@@ -21,17 +20,12 @@
 #include "glutils.h"
 #include "Mesh.h"
 #include <cstdlib>
-#include <cstdio>
-#include <string>
 #include <iostream>
-#include "Sphere.h"
-#include "TextureManager.h"
-#include "RegularGrid.h"
+#include "Terrain.h"
 
 Mesh *scene;
 GLFWwindow* window;
 bool wireframe = false;
-TextureManager* texManager;
 
 
 //add to glfwGetKey that gets the pressed key only once (not several times)
@@ -104,7 +98,7 @@ void initGLFW()
 	glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
 	glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, GL_TRUE);
 
-	window = glfwCreateWindow(1000, 1000, "WTF", NULL, NULL);
+	window = glfwCreateWindow(1000, 1000, "Terrain Tessellation", NULL, NULL);
 	if (!window)
 	{
 		fprintf(stderr, "Failed to open GLFW window.\n");
@@ -157,13 +151,7 @@ int main(void)
 
 	initGL();
 
-	texManager = TextureManager::Inst();
-
-	glActiveTexture(GL_TEXTURE0);
-	if (!texManager->LoadTexture("resources/sm3.tif", 10))
-		std::cout << "Failed to load texture." << std::endl;
-
-	scene = new RegularGrid(window, TextureManager::m_TexMap.at(10).size.x);
+	scene = new Terrain(window);
 	scene->initMesh();
 
 	mainLoop();

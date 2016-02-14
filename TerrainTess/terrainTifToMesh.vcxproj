@@ -23,8 +23,7 @@
     <ClCompile Include="src\GLSLProgram.cpp" />
     <ClCompile Include="src\GLUtils.cpp" />
     <ClCompile Include="src\main.cpp" />
-    <ClCompile Include="src\RegularGrid.cpp" />
-    <ClCompile Include="src\Sphere.cpp" />
+    <ClCompile Include="src\Terrain.cpp" />
     <ClCompile Include="src\TextureManager.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -32,8 +31,7 @@
     <ClInclude Include="src\GLSLProgram.h" />
     <ClInclude Include="src\GLUtils.h" />
     <ClInclude Include="src\Mesh.h" />
-    <ClInclude Include="src\RegularGrid.h" />
-    <ClInclude Include="src\Sphere.h" />
+    <ClInclude Include="src\Terrain.h" />
     <ClInclude Include="src\TextureManager.h" />
   </ItemGroup>
   <ItemGroup>

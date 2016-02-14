@@ -8,7 +8,7 @@
 #include "glm\glm.hpp"
 #include "Camera.h"
 
-class RegularGrid : public Mesh
+class Terrain : public Mesh
 {
 public:
 	GLFWwindow* window;
@@ -30,9 +30,8 @@ public:
 	glm::mat4 modelViewMatrix;
 
 	vec3 lightPos;
-	vec3 spherePos;
 
-	RegularGrid(GLFWwindow* window, uint32_t size);
+	Terrain(GLFWwindow* window);
 	void genRegularGrid();
 
 
